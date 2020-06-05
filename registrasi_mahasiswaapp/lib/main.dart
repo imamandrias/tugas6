@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -44,11 +45,69 @@ class _HomePageState extends State<HomePage> {
         title: Text('Formulir Registrasi Mahasiswa'),
         backgroundColor: Colors.cyan,
       ),
-      body: Container(
-
+      body: ListView(
+        children: <Widget>[
+          Padding(
+            padding: EdgeInsets.all(16.0),
+            child: Form(
+              child: Column(
+                children: <Widget>[
+                  TextFormField(
+                    decoration: InputDecoration(
+                        prefixIcon: Icon(Icons.person),
+                        hintText: 'Nama Lengkap',
+                        enabledBorder: OutlineInputBorder(
+                            borderSide: BorderSide(color: Colors.blueGrey)),
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(16.0),
+                        )),
+                  ),
+                  Padding(
+                    padding: EdgeInsets.all(8.0),
+                  ),
+                  TextFormField(
+                    decoration: InputDecoration(
+                        prefixIcon: Icon(Icons.email),
+                        hintText: 'Email',
+                        enabledBorder: OutlineInputBorder(
+                            borderSide: BorderSide(color: Colors.blueGrey)),
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(16.0),
+                        )),
+                  ),
+                  Padding(
+                    padding: EdgeInsets.all(8.0),
+                  ),
+                  TextFormField(
+                    obscureText: true,
+                    decoration: InputDecoration(
+                        prefixIcon: Icon(Icons.lock),
+                        hintText: 'Password',
+                        enabledBorder: OutlineInputBorder(
+                            borderSide: BorderSide(color: Colors.blueGrey)),
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(16.0),
+                        )),
+                  ),
+                  Padding(
+                    padding: EdgeInsets.all(8.0),
+                  ),
+                  TextFormField(
+                    decoration: InputDecoration(
+                        prefixIcon: Icon(Icons.location_on),
+                        hintText: 'Tempat Lahir',
+                        enabledBorder: OutlineInputBorder(
+                            borderSide: BorderSide(color: Colors.blueGrey)),
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(16.0),
+                        )),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }
 }
-
-
