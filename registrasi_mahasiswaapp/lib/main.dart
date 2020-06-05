@@ -38,6 +38,23 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  //untuk tanggal
+  DateTime _tanggal = new DateTime.now();
+  Future<Null> _selectDate(BuildContext context) async{
+    final DateTime picked = await showDatePicker(
+        context: context,
+        initialDate: _tanggal,
+        firstDate: new DateTime(2002),
+        lastDate: new DateTime(1998)
+    );
+    if(picked != null && picked!= _tanggal){
+      print ('Tanggal terpilih: ${_tanggal.toString()}');
+      setState(() {
+        _tanggal = picked;
+      });
+    }
+
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -101,6 +118,24 @@ class _HomePageState extends State<HomePage> {
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(16.0),
                         )),
+                  ),
+                  Padding(
+                    padding: EdgeInsets.all(8.0),
+                  ),
+                  TextFormField(
+                    decoration: InputDecoration(
+                        prefixIcon: Icon(Icons.location_on),
+                        hintText: 'Tanggal Lahir',
+                        enabledBorder: OutlineInputBorder(
+                            borderSide: BorderSide(color: Colors.blueGrey)),
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(16.0),
+                        ),
+                    ),
+                    onTap: (){
+                      FocusScope.of(context).requestFocus(new FocusNode());
+                      _selectDate(context);
+                    },
                   ),
                 ],
               ),
