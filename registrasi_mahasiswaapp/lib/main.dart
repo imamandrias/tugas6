@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'dart:async';
 
 void main() {
   runApp(MyApp());
@@ -39,22 +40,29 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   //untuk tanggal
-  DateTime _tanggal = new DateTime.now();
-  Future<Null> _selectDate(BuildContext context) async{
+  DateTime _date = new DateTime.now();
+
+  Future<Null> _selectDate(BuildContext context) async {
     final DateTime picked = await showDatePicker(
         context: context,
-        initialDate: _tanggal,
+        initialDate: _date,
         firstDate: new DateTime(2002),
-        lastDate: new DateTime(1998)
-    );
-    if(picked != null && picked!= _tanggal){
-      print ('Tanggal terpilih: ${_tanggal.toString()}');
+        lastDate: new DateTime(1998));
+    if (picked != null && picked != _date) {
+      print('Tanggal terpilih: ${_date.toString()}');
       setState(() {
-        _tanggal = picked;
+        _date = picked;
       });
     }
-
   }
+
+  //Radio Button
+  int _groupValue1 = 0;
+
+  //Select List
+  List<String> _agama = ['Islam', 'Protestan', 'Katolik'];
+  String _nAgama = 'Islam';
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -122,20 +130,53 @@ class _HomePageState extends State<HomePage> {
                   Padding(
                     padding: EdgeInsets.all(8.0),
                   ),
-                  TextFormField(
-                    decoration: InputDecoration(
-                        prefixIcon: Icon(Icons.location_on),
-                        hintText: 'Tanggal Lahir',
-                        enabledBorder: OutlineInputBorder(
-                            borderSide: BorderSide(color: Colors.blueGrey)),
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(16.0),
-                        ),
-                    ),
-                    onTap: (){
-                      FocusScope.of(context).requestFocus(new FocusNode());
+                  RaisedButton(
+                    child: Text('Pilih Tanggal Lahir'),
+                    onPressed: () {
                       _selectDate(context);
                     },
+                  ),
+                  Row(
+                    children: <Widget>[
+                      Radio(
+                        onChanged: (int i) {
+                          setState(() {
+                            _groupValue1 = i;
+                          });
+                        },
+                        value: 0,
+                        groupValue: _groupValue1,
+                      ),
+                      Text('Laki-laki'),
+                      Radio(
+                        onChanged: (int i) {
+                          setState(() {
+                            _groupValue1 = i;
+                          });
+                        },
+                        value: 1,
+                        groupValue: _groupValue1,
+                      ),
+                      Text('Perempuan')
+                    ],
+                  ),
+                  Text(
+                    'Agama : ',
+                    style: TextStyle(color: Colors.black87, fontSize: 16.0),
+                  ),
+                  DropdownButtonFormField(
+                    onChanged: (String value) {
+                      setState(() {
+                        _nAgama = value;
+                      });
+                    },
+                    value: _nAgama,
+                    items: _agama.map((String value) {
+                      return DropdownMenuItem(
+                        child: Text(value),
+                        value: value,
+                      );
+                    }).toList(),
                   ),
                 ],
               ),
