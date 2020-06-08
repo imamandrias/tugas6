@@ -62,6 +62,40 @@ class _HomePageState extends State<HomePage> {
   //Select List
   List<String> _agama = ['Islam', 'Protestan', 'Katolik'];
   String _nAgama = 'Islam';
+  List<String> _prodi = [
+    'Ilmu Komputer',
+    'Teknik Informatika',
+    'Kimia',
+    'Fisika',
+    'Kehutanan',
+    'Kelautan'
+  ];
+  String _nProdi = 'Ilmu Komputer';
+
+  //Controller Form
+  TextEditingController controllerNama = new TextEditingController();
+  TextEditingController controllerEmail = new TextEditingController();
+  TextEditingController controllerHp = new TextEditingController();
+
+  //Pengiriman Data
+  void kirimData() {
+    AlertDialog alertDialog = new AlertDialog(
+      content: Container(
+        height: 200.0,
+        child: Column(
+          children: <Widget>[
+            Text('Nama Lengkap : ${controllerNama.text}'),
+            Text('Email : ${controllerEmail.text}'),
+            Text('Nomor Handphone : ${controllerHp.text}'),
+            Text('Jenis Kelamin : $_groupValue1'),
+            Text('Agama : $_agama'),
+            Text('Prodi : $_prodi'),
+          ],
+        ),
+      ),
+    );
+    showDialog(context: context, child: alertDialog);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -78,6 +112,7 @@ class _HomePageState extends State<HomePage> {
               child: Column(
                 children: <Widget>[
                   TextFormField(
+                    controller: controllerNama,
                     decoration: InputDecoration(
                         prefixIcon: Icon(Icons.person),
                         hintText: 'Nama Lengkap',
@@ -91,6 +126,7 @@ class _HomePageState extends State<HomePage> {
                     padding: EdgeInsets.all(8.0),
                   ),
                   TextFormField(
+                    controller: controllerEmail,
                     decoration: InputDecoration(
                         prefixIcon: Icon(Icons.email),
                         hintText: 'Email',
@@ -108,6 +144,20 @@ class _HomePageState extends State<HomePage> {
                     decoration: InputDecoration(
                         prefixIcon: Icon(Icons.lock),
                         hintText: 'Password',
+                        enabledBorder: OutlineInputBorder(
+                            borderSide: BorderSide(color: Colors.blueGrey)),
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(16.0),
+                        )),
+                  ),
+                  Padding(
+                    padding: EdgeInsets.all(8.0),
+                  ),
+                  TextFormField(
+                    controller: controllerHp,
+                    decoration: InputDecoration(
+                        prefixIcon: Icon(Icons.phone_android),
+                        hintText: 'Nomor Handphone',
                         enabledBorder: OutlineInputBorder(
                             borderSide: BorderSide(color: Colors.blueGrey)),
                         border: OutlineInputBorder(
@@ -162,7 +212,7 @@ class _HomePageState extends State<HomePage> {
                   ),
                   Text(
                     'Agama : ',
-                    style: TextStyle(color: Colors.black87, fontSize: 16.0),
+                    style: TextStyle(color: Colors.lightBlue, fontSize: 16.0),
                   ),
                   DropdownButtonFormField(
                     onChanged: (String value) {
@@ -178,6 +228,111 @@ class _HomePageState extends State<HomePage> {
                       );
                     }).toList(),
                   ),
+                  Padding(
+                    padding: EdgeInsets.all(8.0),
+                  ),
+                  TextFormField(
+                    minLines: 3,
+                    maxLines: 6,
+                    decoration: InputDecoration(
+                        prefixIcon: Icon(Icons.location_on),
+                        hintText: 'Alamat',
+                        enabledBorder: OutlineInputBorder(
+                            borderSide: BorderSide(color: Colors.blueGrey)),
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(16.0),
+                        )),
+                  ),
+                  Padding(
+                    padding: EdgeInsets.all(8.0),
+                  ),
+                  Text(
+                    'Pilihan Program Studi Pertama  : ',
+                    style: TextStyle(color: Colors.lightBlue, fontSize: 16.0),
+                  ),
+                  DropdownButtonFormField(
+                    onChanged: (String value) {
+                      setState(() {
+                        _nProdi = value;
+                      });
+                    },
+                    value: _nProdi,
+                    items: _prodi.map((String value) {
+                      return DropdownMenuItem(
+                        child: Text(value),
+                        value: value,
+                      );
+                    }).toList(),
+                  ),
+                  Padding(
+                    padding: EdgeInsets.all(8.0),
+                  ),
+                  Text(
+                    'Pilihan Program Studi Kedua  : ',
+                    style: TextStyle(color: Colors.lightBlue, fontSize: 16.0),
+                  ),
+                  DropdownButtonFormField(
+                    onChanged: (String value) {
+                      setState(() {
+                        _nProdi = value;
+                      });
+                    },
+                    value: _nProdi,
+                    items: _prodi.map((String value) {
+                      return DropdownMenuItem(
+                        child: Text(value),
+                        value: value,
+                      );
+                    }).toList(),
+                  ),
+                  Padding(
+                    padding: EdgeInsets.all(8.0),
+                  ),
+                  TextFormField(
+                    decoration: InputDecoration(
+                        prefixIcon: Icon(Icons.person),
+                        hintText: 'Nama Orangtua',
+                        enabledBorder: OutlineInputBorder(
+                            borderSide: BorderSide(color: Colors.blueGrey)),
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(16.0),
+                        )),
+                  ),
+                  Padding(
+                    padding: EdgeInsets.all(8.0),
+                  ),
+                  TextFormField(
+                    decoration: InputDecoration(
+                        prefixIcon: Icon(Icons.phone_android),
+                        hintText: 'Handphone Orangtua',
+                        enabledBorder: OutlineInputBorder(
+                            borderSide: BorderSide(color: Colors.blueGrey)),
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(16.0),
+                        )),
+                  ),
+                  Padding(
+                    padding: EdgeInsets.all(8.0),
+                  ),
+                  TextFormField(
+                    minLines: 3,
+                    maxLines: 6,
+                    decoration: InputDecoration(
+                        prefixIcon: Icon(Icons.location_on),
+                        hintText: 'Alamat Orang Tua',
+                        enabledBorder: OutlineInputBorder(
+                            borderSide: BorderSide(color: Colors.blueGrey)),
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(16.0),
+                        )),
+                  ),
+                  RaisedButton(
+                    child: Text('Daftar'),
+                    color: Colors.lightBlue,
+                    onPressed: () {
+                      kirimData();
+                    },
+                  )
                 ],
               ),
             ),
