@@ -55,10 +55,8 @@ class _HomePageState extends State<HomePage> {
       });
     }
   }
-
   //Radio Button
   int _groupValue1 = 0;
-
   //Select List
   List<String> _agama = ['Islam', 'Protestan', 'Katolik'];
   String _nAgama = 'Islam';
@@ -71,7 +69,15 @@ class _HomePageState extends State<HomePage> {
     'Kelautan'
   ];
   String _nProdi = 'Ilmu Komputer';
-
+  List<String> _prodi2 = [
+    'Ilmu Komputer',
+    'Teknik Informatika',
+    'Kimia',
+    'Fisika',
+    'Kehutanan',
+    'Kelautan'
+  ];
+  String _nProdi2 = 'Ilmu Komputer';
   //Controller Form
   TextEditingController controllerNama = new TextEditingController();
   TextEditingController controllerEmail = new TextEditingController();
@@ -88,8 +94,9 @@ class _HomePageState extends State<HomePage> {
             Text('Email : ${controllerEmail.text}'),
             Text('Nomor Handphone : ${controllerHp.text}'),
             Text('Jenis Kelamin : $_groupValue1'),
-            Text('Agama : $_agama'),
-            Text('Prodi : $_prodi'),
+            Text('Agama : $_nAgama'),
+            Text('Prodi 1 : $_nProdi'),
+            Text('Prodi 2 : $_nProdi2'),
           ],
         ),
       ),
@@ -274,11 +281,11 @@ class _HomePageState extends State<HomePage> {
                   DropdownButtonFormField(
                     onChanged: (String value) {
                       setState(() {
-                        _nProdi = value;
+                        _nProdi2 = value;
                       });
                     },
-                    value: _nProdi,
-                    items: _prodi.map((String value) {
+                    value: _nProdi2,
+                    items: _prodi2.map((String value) {
                       return DropdownMenuItem(
                         child: Text(value),
                         value: value,
